@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/fix-paths.mjs",
+    "build:raw": "next build",
+    "fix-paths": "node scripts/fix-paths.mjs",
     "start": "next start",
     "lint": "eslint ."
   },
