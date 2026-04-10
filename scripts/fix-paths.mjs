@@ -1,5 +1,5 @@
 // Replace ~ with - in output filenames for GitHub Pages compatibility
-import { readdirSync, renameSync, readFileSync, writeFileSync } from 'fs'
+import { readdirSync, renameSync, readFileSync, writeFileSync, existsSync } from 'fs'
 import { join } from 'path'
 
 const OUT_DIR = 'out'
@@ -41,4 +41,11 @@ function findFiles(dir) {
 
 console.log('Fixing ~ in filenames for GitHub Pages...')
 walk(OUT_DIR)
+// Ensure .nojekyll exists for GitHub Pages
+const nojekyll = join(OUT_DIR, '.nojekyll')
+if (!existsSync(nojekyll)) {
+  writeFileSync(nojekyll, '')
+  console.log('  Created .nojekyll')
+}
+
 console.log('Done!')
